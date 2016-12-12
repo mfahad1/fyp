@@ -1,0 +1,11 @@
+var Mcp3008 = require('mcp3008.js'),
+    adc = new Mcp3008(),
+    channel = 1;
+while(1){
+console.log("here");
+
+ adc.read(channel, function (value) { 
+        console.log(value);
+ });
+
+}
