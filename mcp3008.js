@@ -5,7 +5,7 @@ var Mcp3008 = require('mcp3008.js'),
     channel = 2;
 
 
-var mVperAmp = 66; // use 100 for 20A Module and 66 for 30A Module
+var mVperAmp = 100; // use 100 for 20A Module and 66 for 30A Module
 var RawValue= 0;
 var ACSoffset = 500; 
 var Voltage = 0;
