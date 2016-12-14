@@ -36,10 +36,16 @@ if(value > maxAmp)
 //console.log("vcalue                    ",value);
 if(ct==100){
  avgAmps = avgAmps / 100;
- console.log("avg", avgAmps);
+ // console.log("avg", avgAmps);
  ct =0;
  avgAmps =0;
- console.log("maxy maxy",maxAmp);
+
+	RawValue = maxAmp - ACSoffset;
+	Voltage = (RawValue / 1023.0) * 5000; // Gets you mV
+	Amps = Voltage/ mVperAmp;
+
+
+ console.log("maxy maxy",Amps);
  maxAmp = 0
 }
 
