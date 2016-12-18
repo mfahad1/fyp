@@ -12,15 +12,7 @@ var Voltage = 0;
 var VRMS = 0;
 var AmpsRMS = 0;
 
-while(1) {
-    Voltage = getVPP();
-    VRMS = (Voltage / 2.0) * 0.707;
-    AmpsRMS = (VRMS * 1000) / mVperAmp;
-    console.log(AmpsRMS);
-    console.log(" Amps RMS");
-}
-function getVPP()
-{
+
     var result;
 
     var readValue;             //value read from the sensor
@@ -41,10 +33,15 @@ function getVPP()
             /*record the maximum sensor value*/
             minValue = readValue;
         }
+        result = ((maxValue - minValue) * 5.0)/1024.0;
+
+
+        Voltage = result;
+        VRMS = (Voltage / 2.0) * 0.707;
+        AmpsRMS = (VRMS * 1000) / mVperAmp;
+        console.log(AmpsRMS);
+        console.log(" Amps RMS");
     })
 
     // Subtract min from max
-    result = ((maxValue - minValue) * 5.0)/1024.0;
 
-    return result;
-}
