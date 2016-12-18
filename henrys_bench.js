@@ -28,7 +28,7 @@ function getVPP()
 
   //  uint32_t start_time = millis();
     adc.poll(channel,1000, function (value) {
-        readValue = analogRead(sensorIn);
+        readValue = value;
         // see if you have a new maxValue
         if (readValue > maxValue)
         {
@@ -40,7 +40,7 @@ function getVPP()
             /*record the maximum sensor value*/
             minValue = readValue;
         }
-    }
+    })
 
     // Subtract min from max
     result = ((maxValue - minValue) * 5.0)/1024.0;
