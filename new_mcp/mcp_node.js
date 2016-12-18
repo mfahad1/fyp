@@ -2,13 +2,13 @@ var Mcp3008 = require('mcp3008.js'),
   adc = new Mcp3008(),
   channel = 2;
 
-var Vdd = 5
+var Vdd = 5000;
 
-var AMultiplier = (Vdd/1024) ;
+var AMultiplier = (Vdd/1023) ;
 var Currentreal = 0;
 var hzCounter = 0;
 var acReadings = [];
-
+var ampScale = 66;
 
 adc.poll(channel,1 ,function (value) {
   hzCounter++;
@@ -23,8 +23,10 @@ adc.poll(channel,1 ,function (value) {
     console.log("avg reading",avgReading)
     acReadings = [];
     hzCounter = 0;
+    Currentreal  = AMultiplier * (avgReading - (512))
+    Currentreal = Currentreal / ampScale;
+    console.log("Vreal :: ",Currentreal );
   }
 
-  // Currentreal  = AMultiplier * (value - (512))
-  // console.log("Vreal :: ",Currentreal );
+
 });
