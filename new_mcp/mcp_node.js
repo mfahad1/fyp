@@ -21,6 +21,8 @@ adc.poll(channel,1 ,function (value) {
     })
     avgReading = Math.sqrt(sumReading / hzCounter) ;
     console.log("avg reading",avgReading)
+    acReadings = [];
+    hzCounter = 0;
   }
 
   // Currentreal  = AMultiplier * (value - (512))
