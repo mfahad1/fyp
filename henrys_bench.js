@@ -21,6 +21,7 @@ var AmpsRMS = 0;
 
   //  uint32_t start_time = millis();
     adc.poll(channel,1000, function (value) {
+        //console.log("raw value",value);
         readValue = value;
         // see if you have a new maxValue
         if (readValue > maxValue)
@@ -39,8 +40,8 @@ var AmpsRMS = 0;
         Voltage = result;
         VRMS = (Voltage / 2.0) * 0.707;
         AmpsRMS = (VRMS * 1000) / mVperAmp;
-        console.log(AmpsRMS);
-        console.log(" Amps RMS");
+        console.log("amps ::",AmpsRMS);
+        //console.log(" Amps RMS");
     })
 
     // Subtract min from max
