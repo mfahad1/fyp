@@ -1,34 +1,28 @@
 var Mcp3008 = require('mcp3008.js'),
-    adc = new Mcp3008(),
-    channel = 2;
+  adc = new Mcp3008(),
+  channel = 2;
 
-var result = 0;
-for(var i = 0; i<150;i++){
- adc.read(channel, function (value) {
- result += value;
-  //console.log("value ::: ",value);
-
- });
-}
-
-
-setTimeout(function(){
-//console.log("here",result);
-result = result /150;
-    result = (result/1023)*240;
-
-    console.log(result);
-},3000)
-
-var Vdd = 3.3
+var Vdd = 5
 
 var AMultiplier = (Vdd/1024) ;
-var Vreal = 0;
+var Currentreal = 0;
+var hzCounter = 0;
+var acReadings = [];
 
-//for(var i = 0; i<150;i++){
- adc.poll(channel,1000 ,function (value) {
 
-  Vreal = AMultiplier * (value - (512))
-  console.log("Vreal :: ",Vreal);
- });
-//}
+adc.poll(channel,1 ,function (value) {
+  hzCounter++;
+  acReadings.push(value * value);
+  if(hzCounter == 20){
+    var sumReading = 0;
+    var avgReading = 0;
+    acReadings.forEach(function (valueReading) {
+      sumReading+= valueReading;
+    })
+    avgReading = Math.sqrt(sumReading / hzCounter) ;
+    console.log("avg reading",avgReading)
+  }
+
+  // Currentreal  = AMultiplier * (value - (512))
+  // console.log("Vreal :: ",Currentreal );
+});
