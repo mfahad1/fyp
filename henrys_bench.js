@@ -12,12 +12,13 @@ var Voltage = 0;
 var VRMS = 0;
 var AmpsRMS = 0;
 
-Voltage = getVPP();
-VRMS = (Voltage/2.0) *0.707;
-AmpsRMS = (VRMS * 1000)/mVperAmp;
-console.log(AmpsRMS);
-console.log(" Amps RMS");
-
+while(1) {
+    Voltage = getVPP();
+    VRMS = (Voltage / 2.0) * 0.707;
+    AmpsRMS = (VRMS * 1000) / mVperAmp;
+    console.log(AmpsRMS);
+    console.log(" Amps RMS");
+}
 function getVPP()
 {
     var result;
